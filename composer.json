@@ -1,19 +1,39 @@
 {
 	"name": "dnadesign/ratingfeedback",
-	"type": "silverstripe-module",
 	"description": "Display a feedback form on any page",
+	"type": "silverstripe-vendormodule",
+    "keywords": [
+        "silverstripe",
+        "cms",
+        "feedback",
+		"rating",
+		"stars"
+    ],
 	"license": "BSD-3-Clause",
-	"keywords": ["silverstripe", "cms", "feedback", "rating", "stars"],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"authors": [
-		{
-			"name": "DNA Design",
-			"email": "dev@dna.co.nz"
-		}
-	],
-	"require": {
-		"silverstripe/framework": "~3.2"
-	},
+        {
+            "name": "DNA Designed Communications Limited",
+            "email": "dev@dna.co.nz"
+        }
+    ],
 	"suggests": {
 		"dnadesign/gridfield-bulk-delete": "Allows for bulk deletion of feedback submissions"
-	}
+	},
+	"require": {
+		"silverstripe/vendor-plugin": "^1.0",
+		"silverstripe/framework": "^4.0"
+	},
+	"extra": {
+        "expose": [
+            "client/css",
+            "client/js"
+        ]
+    },
+	"autoload": {
+        "psr-4": {
+            "DNADesign\\RatingFeedback\\": "src/"
+        }
+    }
 }

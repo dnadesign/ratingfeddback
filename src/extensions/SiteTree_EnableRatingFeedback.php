@@ -1,5 +1,18 @@
 <?php
 
+namespace DNADesign\RatingFeedback\Extensions;
+
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\View\Parsers\URLSegmentFilter;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+
 /**
 * This extension provides a SiteTree object with the options to activate the FeedbackRating functionality.
 */

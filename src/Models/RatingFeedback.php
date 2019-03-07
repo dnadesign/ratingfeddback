@@ -1,5 +1,14 @@
 <?php
 
+namespace DNADesign\RatingFeedback\Models;
+
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Member;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Security\Permission;
+use DNADesign\RatingFeedback\Models\RatingFeedback;
+
+
 class RatingFeedback extends DataObject {
 
 	private static $db = [
@@ -8,8 +17,8 @@ class RatingFeedback extends DataObject {
 	];
 
 	private static $has_one = [
-		'Page' => 'SiteTree',
-		'SubmittedBy' => 'Member'
+		'Page' => SiteTree::class,
+		'SubmittedBy' => Member::class
 	];
 
 	private static $summary_fields = [
@@ -22,10 +31,12 @@ class RatingFeedback extends DataObject {
 
 	private static $default_sort = 'Created DESC';
 
+	private static $table_name = 'RatingFeedback';
+
 	/**
 	* Permissions
 	*/
-	public function canCreate($member = null) 
+	public function canCreate($member = NULL, $context = array()) 
 	{
 		return false;
 	}

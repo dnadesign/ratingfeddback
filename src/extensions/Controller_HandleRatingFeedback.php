@@ -1,5 +1,24 @@
 <?php
 
+namespace DNADesign\RatingFeedback\Extensions;
+
+use SilverStripe\Forms\Form;
+use SilverStripe\Core\Extension;
+use SilverStripe\View\ArrayData;
+use SilverStripe\Control\Session;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Security\Member;
+use SilverStripe\Control\Director;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\View\Requirements;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\DisabledTransformation;
+
 class Controller_HandleRatingFeedback extends Extension {
 
 	private static $allowed_actions = [
@@ -9,27 +28,15 @@ class Controller_HandleRatingFeedback extends Extension {
 	public function onBeforeInit()
 	{
 		// Require the necessary javascript
-		$default_js_script = Config::inst()->get('Controller_HandleRatingFeedback', 'default_js_script');
-
-		if ($default_js_script 
-			&& filter_var($default_js_script, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]) !== false) 
-		{
-			$path = sprintf('%s/javascript/ratingfeedback-%s.src.js',  RATINGFEEDBACK_DIR, $default_js_script);
-			if (Director::fileExists($path)) {
-				Requirements::javascript($path);
-			}			
+		$useDefaultJS = Config::inst()->get(self::class, 'include_default_js');
+		if ($useDefaultJS) {
+			Requirements::javascript('dnadesign/ratingfeedback:client/js/ratingfeedback.js');
 		}
 
 		// Require necessary css
-		$default_css_script = Config::inst()->get('Controller_HandleRatingFeedback', 'default_css_script');
-
-		if ($default_css_script 
-			&& filter_var($default_css_script, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]) !== false) 
-		{
-			$path = sprintf('%s/css/ratingfeedback-%s.css',  RATINGFEEDBACK_DIR, $default_css_script);
-			if (Director::fileExists($path)) {
-				Requirements::css($path);
-			}			
+		$useDefaultCSS = Config::inst()->get(self::class, 'include_default_css');
+		if ($useDefaultCSS) {
+			Requirements::css('dnadesign/ratingfeedback:client/css/ratingfeedback.css');			
 		}
 	}
 
@@ -77,7 +84,8 @@ class Controller_HandleRatingFeedback extends Extension {
 		}
 
 		// Config Form
-		$actions = new FieldList($action = new FormAction('recordRating', 'Submit'));
+		$action = new FormAction('recordRating', 'Submit');
+		$actions = new FieldList($actions);
 		$required = new RequiredFields('Rating');
 
 		if ($this->owner->data()->isFeedbackRequired()) {
