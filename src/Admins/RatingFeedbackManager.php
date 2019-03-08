@@ -5,6 +5,7 @@ namespace DNADesign\RatingFeedback\Admins;
 use SilverStripe\Forms\DateField;
 use SilverStripe\Admin\ModelAdmin;
 use DNADesign\RatingFeedback\Models\RatingFeedback;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
 
 class RatingFeedbackManager extends ModelAdmin
 {
@@ -23,10 +24,10 @@ class RatingFeedbackManager extends ModelAdmin
     public function getEditForm($id = null, $fields = null)
     {
         $form = parent::getEditForm($id, $fields);
-        $field = $form->Fields()->fieldByName($this->modelClass);
+        $field = $form->Fields()->fieldByName($this->modelClassName);
         $config = $field->getConfig();
 
-        $paginator = $config->getComponentByType('GridFieldPaginator');
+        $paginator = $config->getComponentByType(GridFieldPaginator::class);
         $paginator->setItemsPerPage(500);
         
         return $form;
