@@ -18,7 +18,7 @@ class RatingFeedbackManager extends ModelAdmin
     
     private static $menu_priority = -8;
 
-    private static $menu_icon = 'framework/admin/images/menu-icons/16x16/blog.png';
+    private static $menu_icon = 'dnadesign/ratingfeedback: client/images/blog.png';
 
     public function getEditForm($id = null, $fields = null)
     {

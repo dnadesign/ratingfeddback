@@ -28,7 +28,8 @@
 	"extra": {
         "expose": [
             "client/css",
-            "client/js"
+            "client/js",
+            "client/images"
         ]
     },
 	"autoload": {
