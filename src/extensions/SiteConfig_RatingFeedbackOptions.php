@@ -2,12 +2,12 @@
 
 namespace DNADesign\RatingFeedback\Extensions;
 
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\NumericField;
-use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\CheckboxField;
 
 /**
 * This extensions provides the necessary interface to
@@ -21,6 +21,11 @@ class SiteConfig_RatingFeedbackOptions extends DataExtension
         'DefaultRatingBlockIntro' => 'HTMLText',
         'DefaultRatingBlockSuccess' => 'HTMLText',
         'DefaultRatingBlockSpamProtect' => 'Boolean'
+    ];
+
+    private static $casting = [
+        'DefaultRatingBlockIntro' => 'DBHTMLText',
+        'DefaultRatingBlockSuccess' => 'DBHTMLText'
     ];
 
     public function updateCMSFields(FieldList $fields)

@@ -1,0 +1,9 @@
+en:
+  DNADesign\RatingFeedback\Admins\RatingFeedbackManager:
+    MENUTITLE: 'Feedback Manager'
+  DNADesign\RatingFeedback\Models\RatingFeedback:
+    PLURALNAME: 'Rating Feedbacks'
+    PLURALS:
+      one: 'A Rating Feedback'
+      other: '{count} Rating Feedbacks'
+    SINGULARNAME: 'Rating Feedback'
